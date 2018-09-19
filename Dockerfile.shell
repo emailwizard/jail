@@ -1,0 +1,13 @@
+FROM debian:8.1
+MAINTAINER @abdul <abdul.qabiz@gmail.com>
+
+RUN apt-get update && apt-get -y dist-upgrade
+RUN apt-get install -y git
+RUN apt-get install -y ssh
+RUN apt-get install -y vim
+
+RUN apt-get -y install openssh-client
+RUN echo 'export PS1="\u@\w$\[$(tput sgr0)\] "' >> /root/.bashrc
+RUN mkdir /projects
+WORKDIR /projects
+ENTRYPOINT ssh-keygen -q -t rsa -N '' -f /root/.ssh/id_rsa && /bin/bash

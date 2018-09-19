@@ -1,0 +1,23 @@
+FROM debian:8.1
+MAINTAINER @abdul <abdul.qabiz@gmail.com>
+
+RUN apt-get update && apt-get -y dist-upgrade
+RUN apt-get install -y git
+RUN apt-get install -y ssh
+
+# ENV GOPATH /usr/go
+# RUN mkdir $GOPATH
+# ENV PATH $GOPATH/bin:$PATH
+#
+# RUN go get github.com/yudai/gotty
+
+# Install whatever program you want to run through gotty:
+# RUN apt-get install -y bsdgames
+# ENV PATH /usr/games/:$PATH
+RUN apt-get install -y vim
+RUN apt-get -y install openssh-client
+COPY cmd.sh /cmd.sh
+COPY gotty /gotty
+RUN chmod +x /cmd.sh
+RUN chmod +x /gotty
+CMD /cmd.sh
